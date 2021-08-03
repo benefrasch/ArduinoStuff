@@ -9,7 +9,7 @@ SoftwareSerial bt(D1, D2);  //RX,TX
 WiFiClient espClient;
 PubSubClient mqttclient(espClient);
 
-struct {
+struct storage {
   char wifiSSID[30];
   char wifiPwd[80];
 
@@ -29,25 +29,7 @@ void setup() {
   EEPROM.get(0, storage);
   pinMode(D7, OUTPUT);
 
-
-  //-----------print values to serial (except wifi)
-  Serial.println("\ncurrent config:");
-  Serial.print("wifiSSID: ");
-  Serial.println(storage.wifiSSID);
-  Serial.print("mqttServer: ");
-  Serial.println(storage.mqttServer);
-  Serial.print("mqttPort: ");
-  Serial.println(storage.mqttPort);
-  Serial.print("mqttUser: ");
-  Serial.println(storage.mqttUser);
-  Serial.print("mqttPwd: ");
-  Serial.println(storage.mqttPwd);
-  Serial.print("mqttChannel: ");
-  Serial.println(storage.mqttChannel);
-  Serial.print("minimumValue: ");
-  Serial.println(storage.minimumValue);
-
-
+  printConfig();
 
   //------------ WLAN initialisieren
   WiFi.disconnect();
@@ -62,7 +44,7 @@ void setup() {
     Serial.print(".");
     ++WifiTries;
   };
-  Serial.println("\nconnected, meine IP:" + WiFi.localIP().toString());
+  Serial.println("\nconnected, meine IP:" + WiFi.localIP().toString() + "\n");
 
   //----------------------------------MQTT-Client
   mqttclient.setServer(storage.mqttServer, storage.mqttPort);
@@ -88,55 +70,74 @@ void loop() {
   mqttreconnect();
   mqttclient.loop();
 
-  if (Serial.available() || bt.available()) { 
+  if (Serial.available() || bt.available()) {
     String message;
     if (Serial.available())
       message = Serial.readStringUntil('\n');
     if (bt.available())
       message = bt.readStringUntil('\n');
 
-    if (message.indexOf("wifiSSID") == 0) {
+    if (message.indexOf("config") == 0) {  //config
+      printConfig();
+      return;
+
+    } else if (message.indexOf("wifiSSID") == 0) {  //wifi SSID
       message.substring(9).toCharArray(storage.wifiSSID, sizeof(storage.wifiSSID));
-      Serial.print(storage.wifiSSID);
+      bsprint(String(storage.wifiSSID));
 
-    } else if (message.indexOf("wifiPwd") == 0) {
+    } else if (message.indexOf("wifiPwd") == 0) {  //wifi password
       message.substring(8).toCharArray(storage.wifiPwd, sizeof(storage.wifiPwd));
-      Serial.print(storage.wifiPwd);
+      bsprint(String(storage.wifiPwd));
 
-    } else if (message.indexOf("mqttServer") == 0) {
+    } else if (message.indexOf("mqttServer") == 0) {  //mqtt server
       message.substring(11).toCharArray(storage.mqttServer, sizeof(storage.mqttServer));
-      Serial.print(storage.mqttServer);
+      bsprint(String(storage.mqttServer));
 
-    } else if (message.indexOf("mqttPort") == 0) {
+    } else if (message.indexOf("mqttPort") == 0) {  //mqtt port
       storage.mqttPort = message.substring(9).toInt();
-      Serial.print(storage.mqttPort);
+      bsprint(String(storage.mqttPort));
 
-    } else if (message.indexOf("mqttUser") == 0) {
+    } else if (message.indexOf("mqttUser") == 0) {  //mqtt username (not relevant)
       message.substring(9).toCharArray(storage.mqttUser, sizeof(storage.mqttUser));
-      Serial.print(storage.mqttUser);
+      bsprint(String(storage.mqttUser));
 
-    } else if (message.indexOf("mqttPwd") == 0) {
+    } else if (message.indexOf("mqttPwd") == 0) {  //mqtt password
       message.substring(8).toCharArray(storage.mqttPwd, sizeof(storage.mqttPwd));
-      Serial.print(storage.mqttPwd);
+      bsprint(String(storage.mqttPwd));
 
-    } else if (message.indexOf("mqttChannel") == 0) {
+    } else if (message.indexOf("mqttChannel") == 0) {  //mqtt channel
       message.substring(12).toCharArray(storage.mqttChannel, sizeof(storage.mqttChannel));
-      Serial.print(storage.mqttChannel);
+      bsprint(String(storage.mqttChannel));
 
-    } else if (message.indexOf("minimumValue") == 0) {
+    } else if (message.indexOf("minimumValue") == 0) {  //minimum value
       storage.minimumValue = message.substring(13).toInt();
-      Serial.print(storage.minimumValue);
+      bsprint(String(storage.minimumValue));
 
-    } else {
-      Serial.print('wrong keyword - "');
-      Serial.print(message);
-      Serial.print('"');
+    } else {  //if no recognized keyword was used
+      bsprint(String("wrong keyword: ") + String(message));
+      return;
     }
 
-    Serial.println(" - done");
     EEPROM.put(0, storage);
     EEPROM.commit();
   }
+}
+
+void printConfig() {
+  //-----------print values to serial
+
+  bsprint(String("wifiSSID: ") + String(storage.wifiSSID));
+  bsprint(String("wifiPwd: ") + String(storage.wifiPwd));
+  bsprint(String("mqttServer: ") + String(storage.mqttServer));
+  bsprint(String("mqttPort: ") + String(storage.mqttPort));
+  bsprint(String("mqttPwd: ") + String(storage.mqttPwd));
+  bsprint(String("mqttChannel: ") + String(storage.mqttChannel));
+  bsprint(String("minimumValue: ") + String(storage.minimumValue));
+}
+
+void bsprint(String message) {
+  Serial.print(message + String('\n'));
+  bt.print(message + String('\n'));
 }
 
 void mqttcallback(char *to, byte *pay, unsigned int len) {
