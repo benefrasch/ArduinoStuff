@@ -13,7 +13,7 @@ struct {
   int mqttPort;
   char mqttUser[20];
   char mqttPwd[40];
-
+  
   char mqttChannel[40];
   int minimumValue;
 } storage;
