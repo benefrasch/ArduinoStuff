@@ -1,6 +1,10 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <EEPROM.h>
+#include <SoftwareSerial.h>
+
+
+SoftwareSerial bt(D1, D2);  //RX,TX
 
 WiFiClient espClient;
 PubSubClient mqttclient(espClient);
@@ -13,13 +17,14 @@ struct {
   int mqttPort;
   char mqttUser[20];
   char mqttPwd[40];
-  
+
   char mqttChannel[40];
   int minimumValue;
 } storage;
 
 void setup() {
   Serial.begin(9600);
+  bt.begin(9600);
   EEPROM.begin(512);
   EEPROM.get(0, storage);
   pinMode(D7, OUTPUT);
@@ -83,8 +88,12 @@ void loop() {
   mqttreconnect();
   mqttclient.loop();
 
-  if (Serial.available()) {
-    String message = Serial.readStringUntil('\n');
+  if (Serial.available() || bt.available()) { 
+    String message;
+    if (Serial.available())
+      message = Serial.readStringUntil('\n');
+    if (bt.available())
+      message = bt.readStringUntil('\n');
 
     if (message.indexOf("wifiSSID") == 0) {
       message.substring(9).toCharArray(storage.wifiSSID, sizeof(storage.wifiSSID));
@@ -134,7 +143,7 @@ void mqttcallback(char *to, byte *pay, unsigned int len) {
   String topic = String(to);
   //String payload = String((char *)pay);
   char pay_char[len];
-  for (int i=0;i<len;i++) {
+  for (int i = 0; i < len; i++) {
     pay_char[i] = (char)pay[i];
   }
   String payload = String(pay_char);
@@ -145,7 +154,8 @@ void mqttcallback(char *to, byte *pay, unsigned int len) {
 
   if (topic == storage.mqttChannel) {
     if (payload.toInt() >= storage.minimumValue) digitalWrite(D7, HIGH);
-    else digitalWrite(D7, LOW);
+    else
+      digitalWrite(D7, LOW);
   }
 }
 
