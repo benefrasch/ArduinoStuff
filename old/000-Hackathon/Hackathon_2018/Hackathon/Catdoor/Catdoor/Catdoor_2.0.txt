@@ -1,0 +1,100 @@
+#include <PN532_I2C.h>
+#include <PN532.h>
+#include <Wire.h>
+#include <NfcAdapter.h>
+#include <Adafruit_NeoPixel.h>
+
+int RFIDChip = 532 ;
+PN532_I2C pn532_i2c(Wire); // NFC-Reader
+NfcAdapter nfc = NfcAdapter(pn532_i2c);
+// -----------  Einlesefunktion NFC-Tag, wartet auf Tag
+String NFCRead(int typ, int index) { 
+  uint8_t  OK=0;
+  String ret, payloadAsString = "";
+  Serial.print("\nWarte auf NFC-Tag ");
+ // while (!OK)  { // wiederhole bis gueltiger Transponder gesehen
+    long T = millis();
+    OK = nfc.tagPresent();
+    if ((millis()-T) < 15) {                 // QnD Bugfix: zu schnell, wiederhole
+      OK = 0;     
+      Wire.begin();                          // I2C-Bus restart
+      if (Wire.status() != I2C_OK) Serial.println("Something wrong with I2C"); 
+      nfc.begin();
+    }
+ //  }
+  NfcTag tag = nfc.read();
+  String tagID = tag.getUidString();
+  int hash = 0;
+  for (int i = 0;i<tagID.length();i++) hash+=tagID.charAt(i);   
+  switch (typ) {
+  case 2:             
+    if (tag.hasNdefMessage()) { // every tag won't have a message
+      NdefMessage message = tag.getNdefMessage();
+      NdefRecord  record  = message.getRecord(index);
+      int payloadLength = record.getPayloadLength();
+      byte payload[payloadLength];
+      record.getPayload(payload);
+      for (int c = 0; c < payloadLength; c++) {
+        payloadAsString = payloadAsString+String((char)payload[c]);
+      }
+    }
+    ret = payloadAsString;
+    break;
+  case 1: 
+    ret = tagID;
+    break;
+  case 0: 
+    ret = String(hash);
+    break;
+  default:
+    ret = "Fehler nfc" ;
+    break;
+  }
+  delay(500);
+  Serial.println("NFC-Read returns: "+ret);
+  return ret;
+}
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(2,13,NEO_GRBW + NEO_KHZ800);
+
+void setup(){ // Einmalige Initialisierung
+  pinMode( 2 , OUTPUT);
+  Serial.begin(115200);
+  Wire.begin(); // ---- Initialisiere den I2C-Bus 
+  if (Wire.status() != I2C_OK) Serial.println("Something wrong with I2C");
+
+  nfc.begin();  // ---- Initialisiere NFC-Reader
+
+  pinMode( 15 , OUTPUT);
+  pixels.begin();//-------------- Initialisierung Neopixel
+  delay(1);
+  pixels.show();
+  pixels.setPixelColor(0,0,0,0); // alle aus
+  pixels.setPixelColor(1,0,0,0);
+  pixels.show();                 // und anzeigen
+
+  RFIDChip = 589 ;
+
+  digitalWrite( 2 , LOW );
+
+}
+
+void loop() { // Kontinuierliche Wiederholung 
+  if (( ( String(RFIDChip) ) == ( NFCRead(0,0) ) ))
+  {
+    digitalWrite( 15 , HIGH );
+    delay( 7000 );
+    digitalWrite( 15 , LOW );
+    pixels.setPixelColor(0,40,0,0);
+    pixels.show();
+  }
+  else
+  {
+    digitalWrite( 15 , LOW );
+    pixels.setPixelColor(0,0,0,30);
+    pixels.show();
+  }
+  delay( 1000 );
+}
+
+

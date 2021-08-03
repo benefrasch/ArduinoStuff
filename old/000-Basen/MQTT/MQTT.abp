@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cb:CODEBLOCKS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://education.mit.edu/openblocks/ns http://education.mit.edu/openblocks/codeblocks.xsd" xmlns:cb="http://education.mit.edu/openblocks/ns">
+<Pages collapsible-pages="yes" drawer-with-page="yes">
+<Page page-color="128 128 128" page-drawer="Main" page-infullview="yes" page-name="Main" page-width="1920">
+<PageBlocks>
+<Block genus-name="variable_String" id="160">
+<Label>channel</Label>
+<Location>
+<X>703</X>
+<Y>580</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="124" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="message" id="152">
+<Label>c</Label>
+<Location>
+<X>739</X>
+<Y>550</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="157" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="153" connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="glue_sn" id="153">
+<Location>
+<X>775</X>
+<Y>550</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="152" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="151" connector-kind="socket" connector-type="number" init-type="number" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="variable_number" id="151">
+<Label>hey</Label>
+<Location>
+<X>859</X>
+<Y>550</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="153" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="setter_variable_String" id="157">
+<Location>
+<X>527</X>
+<Y>523</Y>
+</Location>
+<BeforeBlockId>148</BeforeBlockId>
+<AfterBlockId>124</AfterBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="158" connector-kind="socket" connector-type="string" init-type="string" label="Variable" position-type="single"/>
+<BlockConnector con-block-id="152" connector-kind="socket" connector-type="string" init-type="string" label="Wert" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="variable_String" id="158">
+<Label>channel</Label>
+<Location>
+<X>739</X>
+<Y>526</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="157" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="variable_String_Payload" id="126">
+<Label>MQTT_Rx_Payload</Label>
+<Location>
+<X>938</X>
+<Y>612</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="155" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="serial_print" id="154">
+<Location>
+<X>700</X>
+<Y>609</Y>
+</Location>
+<BeforeBlockId>124</BeforeBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="155" connector-kind="socket" connector-type="string" init-type="string" label="Text" position-type="single"/>
+<BlockConnector con-block-id="156" connector-kind="socket" connector-type="boolean" init-type="boolean" label="neue Zeile" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="true" id="156">
+<Label>true</Label>
+<Location>
+<X>874</X>
+<Y>636</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="154" connector-kind="plug" connector-type="boolean" init-type="boolean" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="message" id="155">
+<Label>Wert:</Label>
+<Location>
+<X>874</X>
+<Y>612</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="154" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector con-block-id="126" connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="repeat" id="148">
+<Location>
+<X>368</X>
+<Y>467</Y>
+</Location>
+<BeforeBlockId>115</BeforeBlockId>
+<Sockets num-sockets="3">
+<BlockConnector con-block-id="149" connector-kind="socket" connector-type="number" init-type="number" label="Variable" position-type="single"/>
+<BlockConnector con-block-id="150" connector-kind="socket" connector-type="number" init-type="number" label="Mal" position-type="single"/>
+<BlockConnector con-block-id="157" connector-kind="socket" connector-type="cmd" init-type="cmd" label="Befehle" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="mqttsubscribe" id="124">
+<Location>
+<X>527</X>
+<Y>577</Y>
+</Location>
+<BeforeBlockId>157</BeforeBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="160" connector-kind="socket" connector-type="string" init-type="string" label="Topic" position-type="single"/>
+<BlockConnector con-block-id="154" connector-kind="socket" connector-type="cmd" init-type="cmd" label="callback" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="number" id="150">
+<Label>255</Label>
+<Location>
+<X>530</X>
+<Y>494</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="148" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="variable_number" id="149">
+<Label>hey</Label>
+<Location>
+<X>530</X>
+<Y>470</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="148" connector-kind="plug" connector-type="number" init-type="number" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="program" id="115">
+<Location>
+<X>204</X>
+<Y>109</Y>
+</Location>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="127" connector-kind="socket" connector-type="cmd" init-type="cmd" label="Setup" position-type="single"/>
+<BlockConnector con-block-id="148" connector-kind="socket" connector-type="cmd" init-type="cmd" label="Schleife" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="setter_variable_String" id="127">
+<Location>
+<X>369</X>
+<Y>117</Y>
+</Location>
+<BeforeBlockId>115</BeforeBlockId>
+<AfterBlockId>130</AfterBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="128" connector-kind="socket" connector-type="string" init-type="string" label="Variable" position-type="single"/>
+<BlockConnector con-block-id="129" connector-kind="socket" connector-type="string" init-type="string" label="Wert" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="setter_variable_String" id="130">
+<Label>Setze Text-Variable</Label>
+<Location>
+<X>369</X>
+<Y>171</Y>
+</Location>
+<BeforeBlockId>127</BeforeBlockId>
+<AfterBlockId>144</AfterBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="131" connector-kind="socket" connector-type="string" init-type="string" label="Variable" position-type="single"/>
+<BlockConnector con-block-id="132" connector-kind="socket" connector-type="string" init-type="string" label="Wert" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="setter_variable_String" id="144">
+<Location>
+<X>369</X>
+<Y>225</Y>
+</Location>
+<BeforeBlockId>130</BeforeBlockId>
+<AfterBlockId>116</AfterBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="145" connector-kind="socket" connector-type="string" init-type="string" label="Variable" position-type="single"/>
+<BlockConnector con-block-id="146" connector-kind="socket" connector-type="string" init-type="string" label="Wert" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="connectWLANAP" id="116">
+<Location>
+<X>369</X>
+<Y>279</Y>
+</Location>
+<BeforeBlockId>144</BeforeBlockId>
+<AfterBlockId>119</AfterBlockId>
+<Sockets num-sockets="2">
+<BlockConnector con-block-id="141" connector-kind="socket" connector-type="string" init-type="string" label="Netzname" position-type="single"/>
+<BlockConnector con-block-id="142" connector-kind="socket" connector-type="string" init-type="string" label="Passwort" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="mqttconnect" id="119">
+<Location>
+<X>369</X>
+<Y>352</Y>
+</Location>
+<BeforeBlockId>116</BeforeBlockId>
+<Sockets num-sockets="4">
+<BlockConnector con-block-id="147" connector-kind="socket" connector-type="string" init-type="string" label="Broker" position-type="single"/>
+<BlockConnector con-block-id="143" connector-kind="socket" connector-type="string" init-type="string" label="Client" position-type="single"/>
+<BlockConnector con-block-id="122" connector-kind="socket" connector-type="string" init-type="string" label="User" position-type="single"/>
+<BlockConnector con-block-id="123" connector-kind="socket" connector-type="string" init-type="string" label="Passwort" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="GPRSpass" id="123">
+<Label>InfiniLight</Label>
+<Location>
+<X>475</X>
+<Y>427</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="119" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+</Block>
+<Block genus-name="GPRSuser" id="122">
+<Label>infinilight</Label>
+<Location>
+<X>475</X>
+<Y>403</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="119" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+</Block>
+<Block genus-name="GPRSuser" id="143">
+<Label>infinilight</Label>
+<Location>
+<X>475</X>
+<Y>379</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="119" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+</Block>
+<Block genus-name="variable_String" id="147">
+<Label>Broker_IP</Label>
+<Location>
+<X>475</X>
+<Y>355</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="119" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="variable_String" id="142">
+<Label>WLAN_PWD</Label>
+<Location>
+<X>547</X>
+<Y>306</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="116" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="variable_String" id="141">
+<Label>SSID</Label>
+<Location>
+<X>547</X>
+<Y>282</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="116" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="message" id="146">
+<Label>192.168.178.50</Label>
+<Location>
+<X>581</X>
+<Y>252</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="144" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="variable_String" id="145">
+<Label>Broker_IP</Label>
+<Location>
+<X>581</X>
+<Y>228</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="144" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="message" id="132">
+<Label>schneewittchen</Label>
+<Location>
+<X>581</X>
+<Y>198</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="130" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="variable_String" id="131">
+<Label>WLAN_PWD</Label>
+<Location>
+<X>581</X>
+<Y>174</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="130" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+<Block genus-name="message" id="129">
+<Label>weihdorfer3</Label>
+<Location>
+<X>581</X>
+<Y>144</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="127" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="single"/>
+</Plug>
+<Sockets num-sockets="1">
+<BlockConnector connector-kind="socket" connector-type="string" init-type="string" label="" position-type="single"/>
+</Sockets>
+</Block>
+<Block genus-name="variable_String" id="128">
+<Label>WLAN_SSID</Label>
+<Location>
+<X>581</X>
+<Y>120</Y>
+</Location>
+<Plug>
+<BlockConnector con-block-id="127" connector-kind="plug" connector-type="string" init-type="string" label="" position-type="mirror"/>
+</Plug>
+</Block>
+</PageBlocks>
+</Page>
+</Pages>
+</cb:CODEBLOCKS>
