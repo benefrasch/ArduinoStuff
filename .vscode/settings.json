@@ -1,5 +1,12 @@
 {
     "C_Cpp.errorSquiggles": "Enabled",
     "C_Cpp.default.enableConfigurationSquiggles": false,
-    "arduino.path": "C:\\Users\\benef\\Documents\\arduino-1.8.13"
+    "arduino.path": "C:\\Users\\benef\\Documents\\arduino-1.8.13",
+    "files.associations": {
+        "*.tcc": "cpp",
+        "memory": "cpp",
+        "type_traits": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp"
+    }
 }
