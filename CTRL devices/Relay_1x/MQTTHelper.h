@@ -12,6 +12,7 @@ class MQTTHelper : PubSubClient{
         Vector<Vector<String>> messages;
         MQTTHelper(WiFiClient);
         void MQTTConnect(char broker[], int port, char user[], char password[]);
+        void Reconnect(char user[], char password[]);
 
     private:
         void mqttcallback(char *to, byte *pay, unsigned int len);

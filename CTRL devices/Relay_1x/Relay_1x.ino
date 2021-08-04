@@ -1,5 +1,3 @@
-#include <ESP8266WiFi.h>
-#include <PubSubClient.h>
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 #include "WiFiHelper.h"
@@ -9,8 +7,6 @@ WiFiHelper wifi;
 MQTTHelper mqtt(wifi.client);
 
 SoftwareSerial bt(D1, D2); //RX,TX
-
-PubSubClient mqttclient(wifi.client);
 
 struct config
 {
@@ -32,21 +28,19 @@ void setup()
   bt.begin(9600);
   EEPROM.begin(512);
   EEPROM.get(0, config);
-  pinMode(D7, OUTPUT);
-
+  wifi.WiFiConnect(config.wifiSSID, config.wifiPwd);
   printConfig();
 
-  wifi.WiFiConnect(config.wifiSSID, config.wifiPwd);
 
-  mqttclient.subscribe(/*storage.mqttChannel*/ "Relays/Relay1/1");
+  pinMode(D7, OUTPUT);
 
-  mqttreconnect();
+  mqtt.client.subscribe(/*storage.mqttChannel*/ "Relays/Relay1/1");
 }
 
 void loop()
 {
-  mqttreconnect();
-  mqttclient.loop();
+  mqtt.Reconnect(config.wifiSSID, config.wifiPwd);
+  mqtt.client.loop();
 
   if (mqtt.messages.size() > 0)
   {
@@ -137,6 +131,7 @@ void printConfig()
   bsprint(String("mqttServer: ") + String(config.mqttServer));
   bsprint(String("mqttPort: ") + String(config.mqttPort));
   bsprint(String("mqttPwd: ") + String(config.mqttPwd));
+
   bsprint(String("mqttChannel: ") + String(config.mqttChannel));
   bsprint(String("minimumValue: ") + String(config.minimumValue));
 }
@@ -147,17 +142,3 @@ void bsprint(String message)
   bt.print(message + String('\n'));
 }
 
-void mqttreconnect()
-{ // Loop until we're reconnected
-  if (!mqttclient.connected())
-  {
-    if (!mqttclient.connected())
-    {
-      mqttclient.connect("CTRL device", config.mqttUser, config.mqttPwd);
-    }
-    else
-    {
-      mqttclient.loop();
-    }
-  }
-}

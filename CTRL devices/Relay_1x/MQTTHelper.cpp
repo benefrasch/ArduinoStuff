@@ -45,3 +45,18 @@ void MQTTHelper::mqttcallback(char *to, byte *pay, unsigned int len)
     Serial.print(": ");
     Serial.println(payload);
 }
+
+void MQTTHelper::Reconnect(char user[], char password[] )
+{ // Loop until we're reconnected
+  if (!client.connected())
+  {
+    if (!client.connected())
+    {
+      client.connect("CTRL device", user, password);
+    }
+    else
+    {
+      client.loop();
+    }
+  }
+}
