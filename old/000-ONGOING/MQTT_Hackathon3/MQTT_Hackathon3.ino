@@ -14,8 +14,8 @@ String channel_name = "devices/dmx_1/"; //der channel ist das und dahinter noch 
 #include <WiFiClient.h>
 #include <PubSubClient.h>
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient wiFiClient;
+PubSubClient client(wiFiClient);
 DMXESPSerial DMX;
 //----------|WLAN verbinden|-----------------------------------------------------------------
 void connectwifi() {

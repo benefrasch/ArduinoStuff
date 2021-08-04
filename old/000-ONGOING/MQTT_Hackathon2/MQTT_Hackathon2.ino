@@ -15,8 +15,8 @@ const char* mqttPassword = "InfiniLight";
 String channel_name = "devices/dmx_1/"; //der channel ist das und dahinter noch die zahlen der channels(e.g. devices/dmx1/)
 //-----------------------------------------------------------------------------------------------------------------
 //----------|CLients intitialisieren|----------
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient wiFiClient;
+PubSubClient client(wiFiClient);
 DMXESPSerial DMX;
 //----------|WLAN verbinden|----------
 void connectwifi() {

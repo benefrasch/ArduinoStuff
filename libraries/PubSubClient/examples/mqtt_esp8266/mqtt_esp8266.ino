@@ -32,8 +32,8 @@ const char* ssid = "........";
 const char* password = "........";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient wiFiClient;
+PubSubClient client(wiFiClient);
 long lastMsg = 0;
 char msg[50];
 int value = 0;
