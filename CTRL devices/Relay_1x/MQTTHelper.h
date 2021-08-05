@@ -10,7 +10,7 @@ class MQTTHelper : PubSubClient{
     public:
         PubSubClient client;
         Vector<Vector<String>> messages;
-        MQTTHelper(WiFiClient);
+        MQTTHelper(PubSubClient);
         void MQTTConnect(char broker[], int port, char user[], char password[]);
         void Reconnect(char user[], char password[]);
 

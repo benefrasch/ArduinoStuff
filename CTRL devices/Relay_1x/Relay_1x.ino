@@ -4,7 +4,8 @@
 #include "MQTTHelper.h"
 
 WiFiHelper wifi;
-MQTTHelper mqtt(wifi.client);
+PubSubClient mqttclient(wifi.client);
+MQTTHelper mqtt(mqttclient);
 
 SoftwareSerial bt(D1, D2); //RX,TX
 
@@ -29,11 +30,10 @@ void setup()
   EEPROM.begin(512);
   EEPROM.get(0, config);
   wifi.WiFiConnect(config.wifiSSID, config.wifiPwd);
+  mqtt.MQTTConnect(config.mqttServer, config.mqttPort, config.mqttUser, config.mqttPwd);
   printConfig();
 
-
   pinMode(D7, OUTPUT);
-
   mqtt.client.subscribe(/*storage.mqttChannel*/ "Relays/Relay1/1");
 }
 
@@ -141,4 +141,3 @@ void bsprint(String message)
   Serial.print(message + String('\n'));
   bt.print(message + String('\n'));
 }
-
