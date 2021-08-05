@@ -35,12 +35,13 @@ void setup()
 
   pinMode(D7, OUTPUT);
   mqtt.client.subscribe(/*storage.mqttChannel*/ "Relays/Relay1/1");
+  
+  mqtt.client.publish("test1", "0");
 }
 
 void loop()
 {
   mqtt.Reconnect(config.wifiSSID, config.wifiPwd);
-  mqtt.client.loop();
 
   if (mqtt.messages.size() > 0)
   {
@@ -126,11 +127,14 @@ void printConfig()
 {
   //-----------print values to serial
 
+  bsprint("CONFIG: ");
   bsprint(String("wifiSSID: ") + String(config.wifiSSID));
   bsprint(String("wifiPwd: ") + String(config.wifiPwd));
   bsprint(String("mqttServer: ") + String(config.mqttServer));
   bsprint(String("mqttPort: ") + String(config.mqttPort));
+  bsprint(String("mqttUser: ") + String(config.mqttUser));
   bsprint(String("mqttPwd: ") + String(config.mqttPwd));
+  bsprint("");
 
   bsprint(String("mqttChannel: ") + String(config.mqttChannel));
   bsprint(String("minimumValue: ") + String(config.minimumValue));

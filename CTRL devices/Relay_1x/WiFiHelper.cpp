@@ -16,5 +16,8 @@ void WiFiHelper::WiFiConnect(char SSID[], char password[])
     Serial.print(".");
     ++WifiTries;
   };
-  Serial.println("\nconnected, meine IP:" + WiFi.localIP().toString() + "\n");
+  if (WiFi.status() == WL_CONNECTED)
+    Serial.println("  ...connected, meine IP: " + WiFi.localIP().toString() + "\n");
+  else
+    Serial.println("  ...could not connect");
 }
