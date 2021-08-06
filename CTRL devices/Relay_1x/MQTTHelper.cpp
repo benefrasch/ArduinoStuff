@@ -9,24 +9,24 @@ void MQTTHelper::MQTTConnect(char broker[], int port, char user[], char password
 {
     //----------------------------------MQTT-Client
     client.setServer(broker, port);
-    client.setCallback([this](char *to, byte *pay, unsigned int len)
+    client.setCallback([this](char *topic, byte *payload, unsigned int length)
                        {
-                           String topic = String(to);
-                           char pay_char[len];
-                           for (int i = 0; i < len; i++)
+                           String payload_str;
+                           for (int i = 0; i < length; i++)
                            {
-                               pay_char[i] = (char)pay[i];
+                               payload_str += (char)payload[i];
                            }
-                           String payload = String(pay_char);
-                           String feed[2] = {topic, payload}; //idk why i cannot directly  insert the lamda into the vector
-                           messages.push_back(feed);
+
+                           MQTTMessage feed = {String(topic), String(payload_str)};
+                           messages[messages_count] = feed;
+                           ++messages_count;
 
                            Serial.print("received message in: ");
                            Serial.print(topic);
                            Serial.print(": ");
-                           Serial.println(payload);
+                           Serial.println(payload_str);
                        });
-    Serial.print("Connecting to MQTT: ");
+    Serial.print("Connecting topic MQTT: ");
 
     if (client.connect("CTRL device", user, password))
     {
@@ -38,31 +38,14 @@ void MQTTHelper::MQTTConnect(char broker[], int port, char user[], char password
     }
 }
 
-// void MQTTHelper::mqttcallback(char *to, byte *pay, unsigned int len)
-// {
-//     String topic = String(to);
-//     char pay_char[len];
-//     for (int i = 0; i < len; i++)
-//     {
-//         pay_char[i] = (char)pay[i];
-//     }
-//     String payload = String(pay_char);
-//     String feed[2] = {topic, payload}; //idk why i cannot directly  insert the lamda into the vector
-//     messages.push_back(feed);
-//     Serial.print("received message in: ");
-//     Serial.print(topic);
-//     Serial.print(": ");
-//     Serial.println(payload);
-// }
-
 void MQTTHelper::Reconnect(char user[], char password[])
-{ // Loop until we're reconnected
+{
     if (!client.connected())
     {
         if (!client.connected())
         {
             client.connect("CTRL device", user, password);
         }
-        client.loop();
     }
+    client.loop();
 }

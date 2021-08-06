@@ -34,8 +34,8 @@ void setup()
   printConfig();
 
   pinMode(D7, OUTPUT);
-  mqtt.client.subscribe(/*storage.mqttChannel*/ "Relays/Relay1/1");
-  
+  mqtt.client.subscribe(config.mqttChannel);
+
   mqtt.client.publish("test1", "0");
 }
 
@@ -43,16 +43,22 @@ void loop()
 {
   mqtt.Reconnect(config.wifiSSID, config.wifiPwd);
 
-  if (mqtt.messages.size() > 0)
+  if (mqtt.messages_count > 0)
   {
-    if (mqtt.messages[0][0] == config.mqttChannel)
+    Serial.print(mqtt.messages_count);
+    Serial.print("  ");
+    Serial.println(mqtt.messages[0].payload);
+    if (mqtt.messages[0].topic == config.mqttChannel)
     {
-      if (mqtt.messages[0][1].toInt() >= config.minimumValue)
+      if (mqtt.messages[0].payload.toInt() >= config.minimumValue)
         digitalWrite(D7, HIGH);
       else
         digitalWrite(D7, LOW);
     }
-    mqtt.messages.remove(0);
+    for(int i = 0; i<10; ++i){
+      mqtt.messages[i] = mqtt.messages[i+1];
+    }    
+    --mqtt.messages_count;
   }
 
   if (Serial.available() || bt.available())
