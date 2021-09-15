@@ -61,7 +61,8 @@
                 "${workspaceFolder}/libraries/PubSubClient/src",
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13/**",
                 "C:\\Users\\benef\\Documents\\Arduino\\libraries\\Vector\\src",
-                "C:\\Users\\benef\\Documents\\Arduino\\libraries/**"
+                "C:\\Users\\benef\\Documents\\Arduino\\libraries/**",
+                "${workspaceFolder}/libraries/NTPClient"
             ],
             "forcedInclude": [
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\cores\\esp8266\\Arduino.h"

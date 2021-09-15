@@ -42,10 +42,7 @@ void MQTTHelper::Reconnect(char user[], char password[])
 {
     if (!client.connected())
     {
-        if (!client.connected())
-        {
             client.connect("CTRL device", user, password);
-        }
     }
     client.loop();
 }
