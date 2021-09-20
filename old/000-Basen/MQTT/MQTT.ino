@@ -12,8 +12,8 @@ String matrixausgabe_text  = " "; // Ausgabetext als globale Variable
 volatile int matrixausgabe_index = 0;// aktuelle Position in Matrix
 
 //-------------- definition mqtt-object ueber WiFi
-WiFiClient   espClient; 
-PubSubClient mqttclient(espClient);
+WiFiClient   wiFiClient; 
+PubSubClient mqttclient(wiFiClient);
 
 //--------- list of mqtt callback functions 
 #define MAX_MQTT_SUB 10 // maximal 10 subscriptions erlaubt
