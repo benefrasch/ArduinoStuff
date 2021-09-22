@@ -1,29 +1,6 @@
 {
     "version": 4,
     "configurations": [
-        // {
-        //     "name": "Win32",
-        //     "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe",
-        //     "compilerArgs": [],
-        //     "intelliSenseMode": "windows-msvc-x64",
-        //     "includePath": [
-        //         "${default}",
-        //         "C:/Users/benef/Documents/Arduino/libraries/**",
-        //         "C:/Users/benef/Documents/arduino-1.8.13/portable/packages/esp8266/hardware/esp8266/2.7.2/libraries/**",
-        //         "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\sketchbook\\libraries/**",
-        //         "C:\\Users\\benef\\Documents\\arduino-1.8.13\\hardware\\arduino\\avr/**",
-        //         "${workspaceFolder}/libraries/PubSubClient/src",
-        //         "C:\\Users\\benef\\Documents\\arduino-1.8.13/**"
-        //     ],
-        //     "forcedInclude": [],
-        //     "cStandard": "c17",
-        //     "cppStandard": "c++17",
-        //     "defines": [
-        //         "_DEBUG",
-        //         "UNICODE",
-        //         "_UNICODE"
-        //     ]
-        // },
         {
             "name": "Arduino",
             "compilerPath": "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\bin\\xtensa-lx106-elf-g++",
@@ -34,8 +11,7 @@
                 "-mtext-section-literals",
                 "-fno-rtti",
                 "-falign-functions=4",
-                "-std=gnu++11",
-                "-MMD"
+                "-std=gnu++11"
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
@@ -44,26 +20,16 @@
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\tools\\sdk\\libc\\xtensa-lx106-elf\\include",
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\cores\\esp8266",
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\variants\\nodemcu",
-                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\libraries\\ESP8266WiFi\\src",
-                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\sketchbook\\libraries\\PubSubClient\\src",
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\libraries\\EEPROM",
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\libraries\\SoftwareSerial\\src",
+                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\libraries\\ESP8266WiFi\\src",
+                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\sketchbook\\libraries\\PubSubClient\\src",
                 "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\xtensa-lx106-elf\\include\\c++\\4.8.2",
                 "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\xtensa-lx106-elf\\include\\c++\\4.8.2\\xtensa-lx106-elf",
                 "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\xtensa-lx106-elf\\include\\c++\\4.8.2\\backward",
                 "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\lib\\gcc\\xtensa-lx106-elf\\4.8.2\\include",
                 "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\lib\\gcc\\xtensa-lx106-elf\\4.8.2\\include-fixed",
-                "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\xtensa-lx106-elf\\include",
-                "C:\\Users\\benef\\Documents\\Arduino\\libraries\\**",
-                "C:/Users/benef/Documents/arduino-1.8.13/portable/packages/esp8266/hardware/esp8266/2.7.2/libraries/**",
-                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\sketchbook\\libraries/**",
-                "C:\\Users\\benef\\Documents\\arduino-1.8.13\\hardware\\arduino\\avr/**",
-                "${workspaceFolder}/libraries/PubSubClient/src",
-                "C:\\Users\\benef\\Documents\\arduino-1.8.13/**",
-                "C:\\Users\\benef\\Documents\\Arduino\\libraries\\Vector\\src",
-                "C:\\Users\\benef\\Documents\\Arduino\\libraries/**",
-                "${workspaceFolder}/libraries/NTPClient",
-                "${workspaceFolder}/libraries/**"
+                "c:\\users\\benef\\documents\\arduino-1.8.13\\portable\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\2.5.0-4-b40a506\\xtensa-lx106-elf\\include"
             ],
             "forcedInclude": [
                 "C:\\Users\\benef\\Documents\\arduino-1.8.13\\portable\\packages\\esp8266\\hardware\\esp8266\\2.7.2\\cores\\esp8266\\Arduino.h"
